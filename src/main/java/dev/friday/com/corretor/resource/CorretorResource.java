@@ -22,23 +22,10 @@ public class CorretorResource {
     @Autowired
     private PessoaService pessoaService;
 
-    @GetMapping("/count")
-    @ApiOperation(value = "Test", response = String.class)
-    public ResponseEntity<Long> getCount(@RequestParam Long id){
-        return ResponseEntity.ok(pessoaService.getCount());
-    }
-
-    @GetMapping("/findAll")
-    @ApiOperation(value = "Test", response = String.class)
-    public List<Pessoa> findAll(@RequestParam Long id){
-        return (pessoaService.findAll());
-    }
-
     @PostMapping("/insert")
     @ApiOperation(value = "Insert Pessoa into DB")
     @Transactional
     public void insertPessoa(@RequestBody Pessoa pessoa){
-        System.out.println(pessoa.getUNome());
         pessoaService.insertInto(pessoa);
     }
 
