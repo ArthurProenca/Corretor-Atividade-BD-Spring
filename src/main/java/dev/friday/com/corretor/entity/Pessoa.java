@@ -1,16 +1,14 @@
 package dev.friday.com.corretor.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "pessoa")
 public class Pessoa {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cod_pessoa", nullable = false)
-    private Integer id;
+    private Integer cod_pessoa;
 
     @Column(name = "p_nome", nullable = false, length = 40)
     private String pNome;
@@ -46,12 +44,10 @@ public class Pessoa {
     }
 
     public Integer getId() {
-        return id;
+        return cod_pessoa;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.cod_pessoa = id;
     }
-
-    //TODO Reverse Engineering! Migrate other columns to the entity
 }

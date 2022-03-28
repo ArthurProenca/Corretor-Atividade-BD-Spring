@@ -50,4 +50,10 @@ public class PessoaService {
                 .executeUpdate()
         ;
     }
+
+    @Transactional
+    public void deletePessoa(Integer id){
+        String query = "DELETE FROM pessoa WHERE cod_pessoa = " + id;
+        entityManager.createNativeQuery(query).executeUpdate();
+    }
 }

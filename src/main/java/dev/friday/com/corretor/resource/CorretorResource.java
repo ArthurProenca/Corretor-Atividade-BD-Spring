@@ -33,4 +33,10 @@ public class CorretorResource {
         pessoaService.alterPessoa(id, unome, pnome, minicial);
     }
 
+    @PostMapping("/delete")
+    @ApiOperation(value = "Delete a row of Pessoa by ID")
+    public void deletePessoa(@RequestParam Integer id){
+        pessoaService.deletePessoa(id);
+    }
+
 }
