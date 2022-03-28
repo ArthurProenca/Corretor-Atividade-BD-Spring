@@ -6,10 +6,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "associado")
 public class Associado {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
-
     @Column(name = "nome", nullable = false)
     private String nome;
 
@@ -22,14 +18,6 @@ public class Associado {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cod_lcd", nullable = false)
     private Locador codLcd;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Locador getCodLcd() {
         return codLcd;

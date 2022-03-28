@@ -1,16 +1,16 @@
 package dev.friday.com.corretor.entity;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "pessoa")
-public class Pessoa implements Serializable {
-
+public class Pessoa {
     @Id
     @Column(name = "cod_pessoa", nullable = false)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer cod_pessoa;
+    private Integer id;
 
     @Column(name = "p_nome", nullable = false, length = 40)
     private String pNome;
@@ -45,11 +45,13 @@ public class Pessoa implements Serializable {
         this.pNome = pNome;
     }
 
-    public Integer cod_pessoa() {
-        return cod_pessoa;
+    public Integer getId() {
+        return id;
     }
 
-    public void cod_pessoa(Integer cod_pessoa) {
-        this.cod_pessoa = cod_pessoa;
+    public void setId(Integer id) {
+        this.id = id;
     }
+
+    //TODO Reverse Engineering! Migrate other columns to the entity
 }

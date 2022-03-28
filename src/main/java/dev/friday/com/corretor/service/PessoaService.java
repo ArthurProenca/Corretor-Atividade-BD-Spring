@@ -1,6 +1,6 @@
 package dev.friday.com.corretor.service;
 
-import dev.friday.com.corretor.entity.Pessoa;
+import dev.friday.com.corretor.repository.PessoaRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.List;
+import dev.friday.com.corretor.entity.*;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -17,6 +18,8 @@ public class PessoaService {
 
     @Autowired
     EntityManager entityManager;
+    @Autowired
+    PessoaRepository pessoaRepository;
 
     @Transactional
     public void insertInto(Pessoa pessoa) {
@@ -25,7 +28,26 @@ public class PessoaService {
                 .setParameter("p_nome", pessoa.getPNome())
                 .setParameter("u_nome", pessoa.getUNome())
                 .setParameter("m_inicial", pessoa.getMInicial())
-                ;
+        ;
         entityManager.persist(pessoa);
+    }
+
+    @Transactional
+    public void alterPessoa(Integer id, String unome, String pnome, String minicial) {
+        Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+        String query = "";
+        if (pessoa.isPresent()) {
+            if (unome != null)
+                pessoa.get().setUNome(unome);
+            if (pnome != null)
+                pessoa.get().setPNome(pnome);
+            if (minicial != null)
+                pessoa.get().setMInicial(minicial);
+
+            query = String.format("UPDATE pessoa SET u_nome = %s, p_nome = %s, m_inicial = %s WHERE cod_pessoa = %d;", pessoa.get().getUNome(), pessoa.get().getPNome(), pessoa.get().getMInicial(), id);
+        }
+        entityManager.createNativeQuery(query)
+                .executeUpdate()
+        ;
     }
 }

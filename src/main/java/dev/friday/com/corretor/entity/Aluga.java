@@ -6,18 +6,20 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "aluga")
 public class Aluga {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @EmbeddedId
+    private AlugaId id;
 
+    @MapsId("codCrt")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cod_crt", nullable = false)
     private Corretor codCrt;
 
+    @MapsId("codLct")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cod_lct", nullable = false)
     private Pessoa codLct;
 
+    @MapsId("codImv")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cod_imv", nullable = false)
     private Imovel codImv;
@@ -27,14 +29,6 @@ public class Aluga {
 
     @Column(name = "data_fim_alug", nullable = false)
     private LocalDate dataFimAlug;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public LocalDate getDataFimAlug() {
         return dataFimAlug;
@@ -74,5 +68,13 @@ public class Aluga {
 
     public void setCodCrt(Corretor codCrt) {
         this.codCrt = codCrt;
+    }
+
+    public AlugaId getId() {
+        return id;
+    }
+
+    public void setId(AlugaId id) {
+        this.id = id;
     }
 }

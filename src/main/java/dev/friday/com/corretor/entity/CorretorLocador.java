@@ -5,28 +5,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "corretor_locador")
 public class CorretorLocador {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @EmbeddedId
+    private CorretorLocadorId id;
 
+    @MapsId("codLcd")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cod_lcd", nullable = false)
     private Locador codLcd;
 
+    @MapsId("codCrt")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cod_crt", nullable = false)
     private Corretor codCrt;
 
     @Column(name = "comissao", nullable = false)
     private Double comissao;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Double getComissao() {
         return comissao;
@@ -50,5 +43,13 @@ public class CorretorLocador {
 
     public void setCodLcd(Locador codLcd) {
         this.codLcd = codLcd;
+    }
+
+    public CorretorLocadorId getId() {
+        return id;
+    }
+
+    public void setId(CorretorLocadorId id) {
+        this.id = id;
     }
 }

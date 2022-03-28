@@ -1,16 +1,13 @@
 package dev.friday.com.corretor.resource;
 
-import dev.friday.com.corretor.entity.Pessoa;
 import dev.friday.com.corretor.service.PessoaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import dev.friday.com.corretor.entity.*;
 import javax.transaction.Transactional;
-import java.util.List;
 
 @RestController
 @RequestMapping("/public/v1/corretor-resource/pessoa")
@@ -27,6 +24,13 @@ public class CorretorResource {
     @Transactional
     public void insertPessoa(@RequestBody Pessoa pessoa){
         pessoaService.insertInto(pessoa);
+    }
+
+    @PostMapping("/update")
+    @ApiOperation(value = "Alters Pessoa into DB")
+    @Transactional
+    public void alterPessoa(@RequestParam Integer id, @RequestParam(required = false) String unome, @RequestParam (required = false) String pnome, @RequestParam (required = false) String minicial ){
+        pessoaService.alterPessoa(id, unome, pnome, minicial);
     }
 
 }
