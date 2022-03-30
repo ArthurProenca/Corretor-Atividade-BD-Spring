@@ -1,5 +1,6 @@
 package dev.friday.com.corretor.resource;
 
+import dev.friday.com.corretor.entity.Imovel;
 import dev.friday.com.corretor.service.ImovelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +23,7 @@ public class ImovelResource {
     @PostMapping
     @ApiOperation(value = "Insert imovel on DB")
     @Transactional
-    public void insertImovel(@RequestBody ){
-        //imovelService.insertImovel();
+    public void insertImovel(@RequestBody Imovel imovel){
+        imovelService.insertImovel(imovel);
     }
 }
