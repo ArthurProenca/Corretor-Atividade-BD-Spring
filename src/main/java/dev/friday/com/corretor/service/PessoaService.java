@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+
 import dev.friday.com.corretor.entity.*;
+
 import java.util.Optional;
 
 @Service
@@ -52,8 +54,28 @@ public class PessoaService {
     }
 
     @Transactional
-    public void deletePessoa(Integer id){
+    public void deletePessoa(Integer id) {
         String query = "DELETE FROM pessoa WHERE cod_pessoa = " + id;
         entityManager.createNativeQuery(query).executeUpdate();
+    }
+
+    @Transactional
+    public String searchPessoa(String unome, String pnome, String minicial) {
+        Pessoa pessoa = new Pessoa();
+        String query = "";
+        if (unome != null) {
+            pessoa.setUNome(unome);
+            query = String.format("SELECT FROM pessoa WHERE u_nome like %s", pessoa.getUNome());
+        }
+        if (pnome != null) {
+            pessoa.setPNome(pnome);
+            query = String.format("SELECT FROM pessoa WHERE p_nome like %s", pessoa.getPNome());
+        }
+        if (minicial != null) {
+            pessoa.setMInicial(minicial);
+            query = String.format("SELECT FROM pessoa WHERE m_inicial like %s", pessoa.getMInicial());
+        }
+        return String.valueOf(entityManager.createNativeQuery(query).executeUpdate());
+
     }
 }

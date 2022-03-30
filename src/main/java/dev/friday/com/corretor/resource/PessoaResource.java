@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import dev.friday.com.corretor.entity.*;
+
 import javax.transaction.Transactional;
 
 @RestController
@@ -14,7 +15,7 @@ import javax.transaction.Transactional;
 @Api(tags = "Corretor API")
 @CrossOrigin
 @Log4j2
-public class CorretorResource {
+public class PessoaResource {
 
     @Autowired
     private PessoaService pessoaService;
@@ -22,21 +23,30 @@ public class CorretorResource {
     @PostMapping("/insert")
     @ApiOperation(value = "Insert Pessoa into DB")
     @Transactional
-    public void insertPessoa(@RequestBody Pessoa pessoa){
+    public void insertPessoa(@RequestBody Pessoa pessoa) {
         pessoaService.insertInto(pessoa);
     }
 
     @PostMapping("/update")
     @ApiOperation(value = "Alters Pessoa into DB")
     @Transactional
-    public void alterPessoa(@RequestParam Integer id, @RequestParam(required = false) String unome, @RequestParam (required = false) String pnome, @RequestParam (required = false) String minicial ){
+    public void alterPessoa(@RequestParam Integer id, @RequestParam(required = false) String unome, @RequestParam(required = false) String pnome, @RequestParam(required = false) String minicial) {
         pessoaService.alterPessoa(id, unome, pnome, minicial);
     }
 
     @PostMapping("/delete")
     @ApiOperation(value = "Delete a row of Pessoa by ID")
-    public void deletePessoa(@RequestParam Integer id){
+    @Transactional
+    public void deletePessoa(@RequestParam Integer id) {
         pessoaService.deletePessoa(id);
     }
 
+    @PostMapping("/search")
+    @ApiOperation(value = "Search in table pessoa any parameter or String")
+    @Transactional
+    public String searchPessoa(@RequestParam(required = false) String unome, @RequestParam(required = false) String pnome, @RequestParam(required = false) String minicial) {
+        return pessoaService.searchPessoa(unome, pnome, minicial);
+    }
 }
+
+

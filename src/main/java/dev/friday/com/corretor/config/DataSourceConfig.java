@@ -13,7 +13,7 @@ public class DataSourceConfig {
     public DataSource dataSource(){
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/corretora")
+                .url("jdbc:mysql://192.168.0.105:3306/corretora")
                 .username("root")
                 .password("admin")
                 .build();
