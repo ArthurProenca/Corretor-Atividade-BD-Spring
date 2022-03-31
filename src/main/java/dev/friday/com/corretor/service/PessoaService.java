@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 
 import dev.friday.com.corretor.entity.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -78,4 +79,9 @@ public class PessoaService {
         return String.valueOf(entityManager.createNativeQuery(query).executeUpdate());
 
     }
+
+    public Iterable<Pessoa> getAll(){
+        return entityManager.createQuery("SELECT p FROM Pessoa p", Pessoa.class).getResultList();
+    }
+
 }
