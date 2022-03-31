@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Telefone {
     @Id
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "telefone", length = 11)
     private String telefone;
@@ -15,11 +15,11 @@ public class Telefone {
     @JoinColumn(name = "cod_pessoa", nullable = false)
     private int codPessoa;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

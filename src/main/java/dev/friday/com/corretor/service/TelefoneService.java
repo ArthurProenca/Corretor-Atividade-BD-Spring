@@ -30,13 +30,11 @@ public class TelefoneService {
 
     @Transactional
     public void updateTelefone(Integer cod_pessoa, String telefone) {
-        Optional<Telefone> aux = telefoneRepository.findById(cod_pessoa);
         String query = "";
-
-        if(aux.isPresent()){
-            aux.get().setTelefone(telefone);
+        if(telefone != null){
+            query = String.format("UPDATE telefone SET telefone = %s WHERE cod_pessoa = %d;", telefone, cod_pessoa);
         }
-        query = String.format("UPDATE telefone SET telefone = %s WHERE cod_pessoa = %d;", aux.get().getTelefone(), aux.get().getCodPessoa());
+
         entityManager.createNativeQuery(query)
                 .executeUpdate();
     }
@@ -53,7 +51,7 @@ public class TelefoneService {
         String query = "";
         if (telefone != null) {
             aux.setTelefone(telefone);
-            query = String.format("SELECT FROM telefone WHERE telefone like %s", aux.getTelefone());
+            query = String.format("SELECT FROM telefone WHERE telefone like %s;", aux.getTelefone());
         }
 
         return String.valueOf(entityManager.createNativeQuery(query).executeUpdate());
