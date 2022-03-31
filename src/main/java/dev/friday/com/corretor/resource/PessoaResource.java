@@ -47,6 +47,12 @@ public class PessoaResource {
     public String searchPessoa(@RequestParam(required = false) String unome, @RequestParam(required = false) String pnome, @RequestParam(required = false) String minicial) {
         return pessoaService.searchPessoa(unome, pnome, minicial);
     }
+
+    @GetMapping("/all")
+    @ApiOperation(value = "Get in table pessoa all tuples")
+    public Iterable<Pessoa> getAllPessoa(){
+        return pessoaService.getAll();
+    }
 }
 
 

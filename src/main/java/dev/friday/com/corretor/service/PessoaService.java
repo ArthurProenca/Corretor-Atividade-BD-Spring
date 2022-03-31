@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 
 import dev.friday.com.corretor.entity.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,13 +26,13 @@ public class PessoaService {
 
     @Transactional
     public void insertInto(Pessoa pessoa) {
-        String query = "INSERT INTO pessoa (p_nome, u_nome, m_inicial) VALUES (p_nome = :p_nome, u_nome = :u_nome, m_inicial = :m_inicial)";
-        entityManager.createNativeQuery(query)
-                .setParameter("p_nome", pessoa.getPNome())
-                .setParameter("u_nome", pessoa.getUNome())
-                .setParameter("m_inicial", pessoa.getMInicial())
+        entityManager.createNativeQuery("INSERT INTO pessoa (p_nome, u_nome, m_inicial) VALUES (?1, ?2, ?3)")
+                .setParameter(1, pessoa.getMInicial())
+                .setParameter(2, pessoa.getUNome())
+                .setParameter(3, pessoa.getMInicial())
+                .executeUpdate()
         ;
-        entityManager.persist(pessoa);
+        //entityManager.persist(pessoa);
     }
 
     @Transactional
@@ -78,4 +79,9 @@ public class PessoaService {
         return String.valueOf(entityManager.createNativeQuery(query).executeUpdate());
 
     }
+
+    public Iterable<Pessoa> getAll(){
+        return entityManager.createQuery("SELECT p FROM Pessoa p", Pessoa.class).getResultList();
+    }
+
 }
