@@ -4,7 +4,7 @@ USE corretora;
 
 CREATE TABLE pessoa
 (
-    cod_pessoa INT         NOT NULL,
+    cod_pessoa INT         NOT NULL AUTO_INCREMENT,
     p_nome     VARCHAR(40) NOT NULL,
     m_inicial  VARCHAR(40) NOT NULL,
     u_nome     VARCHAR(40) NOT NULL,
@@ -15,6 +15,7 @@ CREATE TABLE telefone
 (
     telefone   varchar(11),
     cod_pessoa INT NOT NULL,
+    CONSTRAINT pk_telefone PRIMARY KEY (cod_pessoa, telefone),
     CONSTRAINT fk_cod_pessoa FOREIGN KEY (cod_pessoa) REFERENCES pessoa (cod_pessoa) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
