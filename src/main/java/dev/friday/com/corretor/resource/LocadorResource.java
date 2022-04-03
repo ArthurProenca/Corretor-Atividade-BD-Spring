@@ -25,4 +25,17 @@ public class LocadorResource {
         Locador locador = new Locador(cod_lcd, e_parceiro);
         locadorService.insertLocador(locador);
     }
+
+    @Transactional
+    @PostMapping("/update")
+    public void updateLocador(@RequestParam int cod_lcd, @RequestParam Boolean e_parceiro) {
+        Locador locador = new Locador(cod_lcd, e_parceiro);
+        locadorService.updateLocador(locador);
+    }
+
+    @Transactional
+    @PostMapping("/delete")
+    public void deleteLocador(@RequestParam int cod_lcd) {
+        locadorService.deleteLocador(cod_lcd);
+    }
 }

@@ -23,4 +23,19 @@ public class TelefoneService {
                 .setParameter(2, telefone.getTelefone())
                 .executeUpdate();
     }
+
+    @Transactional
+    public void updateTelefone(Telefone telefone) {
+        entityManager.createNativeQuery("UPDATE telefone SET telefone = ?1 WHERE cod_pessoa = ?2")
+                .setParameter(1, telefone.getTelefone())
+                .setParameter(2, telefone.getCod_pessoa())
+                .executeUpdate();
+    }
+
+    @Transactional
+    public void deleteTelefone(Integer id) {
+        entityManager.createNativeQuery("DELETE FROM telefone WHERE cod_pessoa = ?1")
+                .setParameter(1, id)
+                .executeUpdate();
+    }
 }

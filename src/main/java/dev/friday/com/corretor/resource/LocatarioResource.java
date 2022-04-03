@@ -24,4 +24,18 @@ public class LocatarioResource {
         log.info("Inserindo Locatario: " + locatario);
         locatarioService.insertLocatario(locatario);
     }
+
+    @Transactional
+    @PostMapping("/update")
+    public void updateLocatario(@RequestBody Locatario locatario) {
+        log.info("Atualizando Locatario: " + locatario);
+        locatarioService.updateLocatario(locatario);
+    }
+
+    @Transactional
+    @PostMapping("/delete")
+    public void deleteLocatario(@RequestParam Integer id) {
+        log.info("Deletando Locatario: " + id);
+        locatarioService.deleteLocatario(id);
+    }
 }

@@ -23,4 +23,16 @@ public class RegrasResource {
     public void insertRegras(@RequestBody RegrasCondominio regrasCondominio) {
         service.insertRegras(regrasCondominio);
     }
+
+    @PostMapping("/update")
+    @Transactional
+    public void updateRegras(@RequestBody RegrasCondominio regrasCondominio) {
+        service.updateRegras(regrasCondominio);
+    }
+
+    @PostMapping("/delete")
+    @Transactional
+    public void deleteRegras(@RequestParam Integer id) {
+        service.deleteRegras(id);
+    }
 }

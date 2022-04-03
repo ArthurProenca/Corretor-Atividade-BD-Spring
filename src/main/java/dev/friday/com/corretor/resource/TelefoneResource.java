@@ -24,4 +24,18 @@ public class TelefoneResource {
         log.info("Inserindo telefone: " + telefone);
         telefoneService.insertTelefone(telefone);
     }
+
+    @Transactional
+    @PostMapping("/update")
+    public void updateTelefone(@RequestBody Telefone telefone) {
+        log.info("Atualizando telefone: " + telefone);
+        telefoneService.updateTelefone(telefone);
+    }
+
+    @Transactional
+    @PostMapping("/delete")
+    public void deleteTelefone(@RequestParam Integer id) {
+        log.info("Deletando telefone: " + id);
+        telefoneService.deleteTelefone(id);
+    }
 }

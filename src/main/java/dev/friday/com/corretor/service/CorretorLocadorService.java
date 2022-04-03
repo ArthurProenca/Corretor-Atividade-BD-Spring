@@ -24,4 +24,20 @@ public class CorretorLocadorService {
                 .setParameter(3, corretorLocador.getComissao())
                 .executeUpdate();
     }
+
+    @Transactional
+    public void updateCorretorLocador(CorretorLocador corretorLocador) {
+        entityManager.createNativeQuery("update corretor_locador set cod_crt = ?1, comissao = ?2 where cod_lcd = ?3")
+                .setParameter(1, corretorLocador.getCod_crt())
+                .setParameter(2, corretorLocador.getComissao())
+                .setParameter(3, corretorLocador.getCod_lcd())
+                .executeUpdate();
+    }
+
+    @Transactional
+    public void deleteCorretorLocador(Integer id) {
+        entityManager.createNativeQuery("delete from corretor_locador where cod_lcd = ?1")
+                .setParameter(1, id)
+                .executeUpdate();
+    }
 }

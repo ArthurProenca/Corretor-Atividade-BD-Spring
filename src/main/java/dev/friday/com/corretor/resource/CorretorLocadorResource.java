@@ -25,4 +25,18 @@ public class CorretorLocadorResource {
         log.info("Inserindo corretor locador");
         corretorLocadorService.insertCorretorLocador(corretorLocador);
     }
+
+    @Transactional
+    @PostMapping("/update")
+    public void updateCorretorLocador(@RequestBody CorretorLocador corretorLocador) {
+        log.info("Atualizando corretor locador");
+        corretorLocadorService.updateCorretorLocador(corretorLocador);
+    }
+
+    @Transactional
+    @PostMapping("/delete")
+    public void deleteCorretorLocador(@RequestParam Integer id) {
+        log.info("Deletando corretor locador");
+        corretorLocadorService.deleteCorretorLocador(id);
+    }
 }

@@ -24,4 +24,18 @@ public class ImovelResource {
         log.info("Inserting imovel: " + imovel.toString());
         imovelService.insertImovel(imovel);
     }
+
+    @Transactional
+    @PostMapping("/update")
+    public void updateImovel(@RequestBody Imovel imovel) {
+        log.info("Updating imovel: " + imovel.toString());
+        imovelService.updateImovel(imovel);
+    }
+
+    @Transactional
+    @PostMapping("/delete")
+    public void deleteImovel(@RequestBody Integer id) {
+        log.info("Deleting imovel: ");
+        imovelService.deleteImovel(id);
+    }
 }

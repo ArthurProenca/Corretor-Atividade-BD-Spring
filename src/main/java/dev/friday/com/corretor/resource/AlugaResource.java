@@ -23,4 +23,18 @@ public class AlugaResource {
     public void insertAluga(@RequestBody Aluga aluga) {
         alugaService.insertAluga(aluga);
     }
+
+    @PostMapping("/update")
+    @Transactional
+    public void updateAluga(@RequestBody Aluga aluga) {
+        alugaService.updateAluga(aluga);
+    }
+
+    @PostMapping("/delete")
+    @Transactional
+    public void deleteAluga(@RequestParam Integer id) {
+        alugaService.deleteAluga(id);
+    }
 }
+
+

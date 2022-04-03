@@ -36,4 +36,30 @@ public class ImovelService {
                 .executeUpdate();
     }
 
+    @Transactional
+    public void updateImovel(Imovel imovel) {
+        entityManager.createNativeQuery("UPDATE imovel SET cod_lcd = ?1, mensalidade = ?2, nQuartos = ?3, nBanheiros = ?4, dimensao = ?5, temSuite = ?6, rua = ?7, numero = ?8, bairro = ?9, num_apart = ?10, tem_garagem = ?11, tipo = ?12 WHERE cod_imv = ?13")
+                .setParameter(1, imovel.getCod_lcd())
+                .setParameter(2, imovel.getMensalidade())
+                .setParameter(3, imovel.getNQuartos())
+                .setParameter(4, imovel.getNBanheiros())
+                .setParameter(5, imovel.getDimensao())
+                .setParameter(6, imovel.getTemSuite())
+                .setParameter(7, imovel.getRua())
+                .setParameter(8, imovel.getNumero())
+                .setParameter(9, imovel.getBairro())
+                .setParameter(10, imovel.getNum_apart())
+                .setParameter(11, imovel.getTem_garagem())
+                .setParameter(12, imovel.getTipo())
+                .setParameter(13, imovel.getCod_imv())
+                .executeUpdate();
+    }
+
+    @Transactional
+    public void deleteImovel(int cod_imv) {
+        entityManager.createNativeQuery("DELETE FROM imovel WHERE cod_imv = ?1")
+                .setParameter(1, cod_imv)
+                .executeUpdate();
+    }
+
 }

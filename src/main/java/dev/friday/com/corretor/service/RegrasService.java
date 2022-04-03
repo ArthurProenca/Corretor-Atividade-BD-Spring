@@ -23,4 +23,19 @@ public class RegrasService {
                 .setParameter(2, regrasCondominio.getRegra())
                 .executeUpdate();
     }
+
+    @Transactional
+    public void updateRegras(RegrasCondominio regrasCondominio) {
+        entityManager.createNativeQuery("UPDATE regras_condominio SET regra = ?1 WHERE cod_imv = ?2")
+                .setParameter(1, regrasCondominio.getRegra())
+                .setParameter(2, regrasCondominio.getCod_imv())
+                .executeUpdate();
+    }
+
+    @Transactional
+    public void deleteRegras(Integer id) {
+        entityManager.createNativeQuery("DELETE FROM regras_condominio WHERE cod_imv = ?1")
+                .setParameter(1, id)
+                .executeUpdate();
+    }
 }

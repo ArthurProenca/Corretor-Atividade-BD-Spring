@@ -28,4 +28,18 @@ public class CorretorResource {
         corretorService.insertCorretor(corretor);
     }
 
+    @Transactional
+    @PostMapping("/update")
+    public void updateCorretor(@RequestBody Corretor corretor) {
+        log.info("Atualizando corretor");
+        corretorService.updateCorretor(corretor);
+    }
+
+    @Transactional
+    @PostMapping("/delete")
+    public void deleteCorretor(@RequestParam Integer id) {
+        log.info("Deletando corretor");
+        corretorService.deleteCorretor(id);
+    }
+
 }

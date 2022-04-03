@@ -26,4 +26,22 @@ public class AlugaService {
                 .setParameter(5, aluga.getData_fim_alug())
                 .executeUpdate();
     }
+
+    @Transactional
+    public void updateAluga(Aluga aluga) {
+        entityManager.createNativeQuery("UPDATE aluga SET cod_crt = ?1, cod_lct = ?2, cod_imv = ?3, data_inicio_alug = ?4, data_fim_alug = ?5 WHERE cod_imv = ?3")
+                .setParameter(1, aluga.getCod_crt())
+                .setParameter(2, aluga.getCod_lct())
+                .setParameter(3, aluga.getCod_imv())
+                .setParameter(4, aluga.getData_inicio_alug())
+                .setParameter(5, aluga.getData_fim_alug())
+                .executeUpdate();
+    }
+
+    @Transactional
+    public void deleteAluga(Integer id){
+        entityManager.createNativeQuery("DELETE FROM aluga WHERE cod_imv = ?1")
+                .setParameter(1, id)
+                .executeUpdate();
+    }
 }

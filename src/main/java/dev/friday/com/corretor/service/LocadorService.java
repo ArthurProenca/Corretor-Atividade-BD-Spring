@@ -27,4 +27,17 @@ public class LocadorService {
                 .setParameter(1, locador.getCod_lcd())
                 .setParameter(2, locador.getE_parceiro()).executeUpdate();
     }
+
+    @Transactional
+    public void updateLocador(Locador locador) {
+        entityManager.createNativeQuery("UPDATE locador SET e_parceiro = ?1 WHERE cod_lcd = ?2")
+                .setParameter(1, locador.getE_parceiro())
+                .setParameter(2, locador.getCod_lcd()).executeUpdate();
+    }
+
+    @Transactional
+    public void deleteLocador(Integer id) {
+        entityManager.createNativeQuery("DELETE FROM locador WHERE cod_lcd = ?1")
+                .setParameter(1, id).executeUpdate();
+    }
 }

@@ -24,4 +24,18 @@ public class AssociadoResource {
         log.info("Inserindo associado");
         associadoService.insertAssociado(associado);
     }
+
+    @Transactional
+    @PostMapping("/update")
+    public void updateAssociado(@RequestBody Associado associado) {
+        log.info("Atualizando associado");
+        associadoService.updateAssociado(associado);
+    }
+
+    @Transactional
+    @PostMapping("/delete")
+    public void deleteAssociado(@RequestParam Integer id) {
+        log.info("Deletando associado");
+        associadoService.deleteAssociado(id);
+    }
 }

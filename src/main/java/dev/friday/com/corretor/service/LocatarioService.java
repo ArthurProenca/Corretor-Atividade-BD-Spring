@@ -24,4 +24,20 @@ public class LocatarioService {
                 .setParameter(2, locatario.getData_nasc())
                 .executeUpdate();
     }
+
+    @Transactional
+    public void updateLocatario(Locatario locatario) {
+        entityManager.createNativeQuery("UPDATE locatario SET cod_lct = ?1, data_nasc = ?2 WHERE cod_lct = ?3")
+                .setParameter(1, locatario.getCod_lct())
+                .setParameter(2, locatario.getData_nasc())
+                .setParameter(3, locatario.getCod_lct())
+                .executeUpdate();
+    }
+
+    @Transactional
+    public void deleteLocatario(Integer id) {
+        entityManager.createNativeQuery("DELETE FROM locatario WHERE cod_lct = ?1")
+                .setParameter(1, id)
+                .executeUpdate();
+    }
 }
