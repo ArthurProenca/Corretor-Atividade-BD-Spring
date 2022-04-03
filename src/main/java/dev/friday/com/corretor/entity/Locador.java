@@ -5,15 +5,30 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "locador")
-@PrimaryKeyJoinColumn(name = "cod_lcd", referencedColumnName = "cod_pessoa")
-public class Locador extends Pessoa {
+public class Locador {
 
+    @Id
+    @Column(name = "cod_lcd")
+    private int cod;
 
     @Column(name = "e_parceiro")
     private boolean eParceiro;
 
+    public int getCod() {
+        return cod;
+    }
+
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
+
+    public boolean iseParceiro() {
+        return eParceiro;
+    }
+
+    public void seteParceiro(boolean eParceiro) {
+        this.eParceiro = eParceiro;
+    }
 }

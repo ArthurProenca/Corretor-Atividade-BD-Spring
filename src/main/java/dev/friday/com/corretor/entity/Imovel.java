@@ -9,7 +9,6 @@ public class Imovel {
     @Column(name = "cod_imv", nullable = false)
     private Integer id;
 
-    @Basic(fetch = FetchType.LAZY)
     @Column(name = "cod_lcd", nullable = false)
     private Integer codLcd;
 
