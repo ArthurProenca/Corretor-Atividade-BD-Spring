@@ -12,16 +12,22 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "locatario")
+@Table(name = "associado")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Locatario {
+@NoArgsConstructor
+public class Associado {
     @Id
-    @Column(name = "cod_lct", nullable = false)
-    private int cod_lct;
+    @Column(name = "cod_lcd", nullable = false)
+    private Integer cod_lcd;
+
+    @Column(name = "nome", nullable = false)
+    private String nome;
 
     @Column(name = "data_nasc", nullable = false)
     private Date data_nasc;
+
+    @Column(name = "tipo_associacao", nullable = false)
+    private String tipo_associacao;
 }

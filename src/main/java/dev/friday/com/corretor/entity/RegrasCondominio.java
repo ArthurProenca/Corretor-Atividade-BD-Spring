@@ -4,24 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 @Entity
-@Table(name = "locatario")
+@Table(name="regras_condominio")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Locatario {
+public class RegrasCondominio {
     @Id
-    @Column(name = "cod_lct", nullable = false)
-    private int cod_lct;
+    @Column(name = "cod_imv", nullable = false)
+    private Integer cod_imv;
 
-    @Column(name = "data_nasc", nullable = false)
-    private Date data_nasc;
+    @Column(name = "regra", nullable = false)
+    private String regra;
 }

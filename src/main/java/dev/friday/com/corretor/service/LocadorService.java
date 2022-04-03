@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.swing.text.html.parser.Entity;
 import javax.transaction.Transactional;
 
 @Service
@@ -20,14 +19,12 @@ public class LocadorService {
     private LocadorRepository locadorRepository;
 
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Transactional
     public void insertLocador(Locador locador) {
-        entityManager.createNativeQuery("INSERT INTO locador (cod_lcd, e_parceiro) " +
-                        "VALUES (?1, ?2)")
-                .setParameter(1, locador.getCod())
-                .setParameter(2, locador.iseParceiro()).executeUpdate();
-
+        entityManager.createNativeQuery("INSERT INTO locador (cod_lcd, e_parceiro) VALUES (?1, ?2)")
+                .setParameter(1, locador.getCod_lcd())
+                .setParameter(2, locador.getE_parceiro()).executeUpdate();
     }
 }

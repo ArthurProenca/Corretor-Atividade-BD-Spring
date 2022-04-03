@@ -1,80 +1,37 @@
 package dev.friday.com.corretor.entity;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "aluga")
 public class Aluga {
-    @EmbeddedId
-    private AlugaId id;
+    @Id
+    @Column(name = "cod_imv", nullable = false)
+    private int cod_imv;
 
-    @MapsId("codCrt")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cod_crt", nullable = false)
-    private Corretor codCrt;
+    @Column(name = "cod_crt", nullable = false)
+    private int cod_crt;
 
-    @MapsId("codLct")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cod_lct", nullable = false)
-    private Pessoa codLct;
-
-    @MapsId("codImv")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cod_imv", nullable = false)
-    private Imovel codImv;
+    @Column(name = "cod_lct", nullable = false)
+    private int cod_lct;
 
     @Column(name = "data_inicio_alug", nullable = false)
-    private LocalDate dataInicioAlug;
+    private Date data_inicio_alug;
 
     @Column(name = "data_fim_alug", nullable = false)
-    private LocalDate dataFimAlug;
-
-    public LocalDate getDataFimAlug() {
-        return dataFimAlug;
-    }
-
-    public void setDataFimAlug(LocalDate dataFimAlug) {
-        this.dataFimAlug = dataFimAlug;
-    }
-
-    public LocalDate getDataInicioAlug() {
-        return dataInicioAlug;
-    }
-
-    public void setDataInicioAlug(LocalDate dataInicioAlug) {
-        this.dataInicioAlug = dataInicioAlug;
-    }
-
-    public Imovel getCodImv() {
-        return codImv;
-    }
-
-    public void setCodImv(Imovel codImv) {
-        this.codImv = codImv;
-    }
-
-    public Pessoa getCodLct() {
-        return codLct;
-    }
-
-    public void setCodLct(Pessoa codLct) {
-        this.codLct = codLct;
-    }
-
-    public Corretor getCodCrt() {
-        return codCrt;
-    }
-
-    public void setCodCrt(Corretor codCrt) {
-        this.codCrt = codCrt;
-    }
-
-    public AlugaId getId() {
-        return id;
-    }
-
-    public void setId(AlugaId id) {
-        this.id = id;
-    }
+    private Date data_fim_alug;
 }

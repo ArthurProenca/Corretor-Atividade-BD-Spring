@@ -1,17 +1,27 @@
 package dev.friday.com.corretor.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@Entity
 @Table(name = "corretor")
-@PrimaryKeyJoinColumn(name = "cod_crt", referencedColumnName = "cod_pessoa")
-public class Corretor extends Pessoa {
+public class Corretor {
+    @Id
+    @Column(name = "cod_crt", nullable = false)
+    private Integer cod_crt;
 
-    @Column
+    @Column(name = "avaliacao", nullable = false)
     private Integer avaliacao;
+
 }

@@ -1,6 +1,6 @@
 package dev.friday.com.corretor.service;
 
-import dev.friday.com.corretor.repository.PessoaRepository;
+import dev.friday.com.corretor.entity.Locatario;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +12,16 @@ import javax.transaction.Transactional;
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
-public class CorretoraService {
-
+public class LocatarioService {
     @Autowired
     EntityManager entityManager;
-    @Autowired
-    PessoaRepository pessoaRepository;
+
 
     @Transactional
-    public void renameTable(String table, String newTableName){
-        String query = "RENAME TABLE " + table + " TO " + newTableName;
-        entityManager.createNativeQuery(query)
+    public void insertLocatario(Locatario locatario) {
+        entityManager.createNativeQuery("INSERT INTO locatario (cod_lct, data_nasc) VALUES (?1, ?2)")
+                .setParameter(1, locatario.getCod_lct())
+                .setParameter(2, locatario.getData_nasc())
                 .executeUpdate();
     }
 }

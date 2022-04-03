@@ -11,16 +11,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "telefone")
+@Table(name = "corretor_locador")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Telefone {
+public class CorretorLocador {
     @Id
-    @Column(name = "cod_pessoa", nullable = false)
-    private Integer cod_pessoa;
+    @Column(name = "cod_lcd", nullable = false)
+    private Integer cod_lcd;
 
-    @Column(name = "telefone", nullable = false)
-    private String telefone;
+    @Column(name = "cod_crt", nullable = false)
+    private Integer cod_crt;
+
+    @Column(name = "comissao", nullable = false)
+    private Double comissao;
 }
