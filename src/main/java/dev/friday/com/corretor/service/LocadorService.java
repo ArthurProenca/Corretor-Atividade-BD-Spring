@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -39,5 +40,10 @@ public class LocadorService {
     public void deleteLocador(Integer id) {
         entityManager.createNativeQuery("DELETE FROM locador WHERE cod_lcd = ?1")
                 .setParameter(1, id).executeUpdate();
+    }
+
+    public List<Locador> getLocadorNaoAluga(){
+        return entityManager.createNativeQuery("SELECT * FROM locador WHERE cod_lcd NOT IN (SELECT cod_lcd " +
+                "FROM locador NATURAL JOIN imovel NATURAL JOIN aluga);", Locador.class).getResultList();
     }
 }

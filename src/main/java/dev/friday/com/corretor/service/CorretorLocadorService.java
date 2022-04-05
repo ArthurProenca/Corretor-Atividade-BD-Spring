@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -39,5 +40,11 @@ public class CorretorLocadorService {
         entityManager.createNativeQuery("delete from corretor_locador where cod_lcd = ?1")
                 .setParameter(1, id)
                 .executeUpdate();
+    }
+
+    public List<CorretorLocador> getCorretorComissao() {
+
+        return entityManager.createNativeQuery("SELECT * FROM corretor NATURAL JOIN corretor_locador WHERE comissao <= 300 AND avaliacao >= 4" +
+                ";", CorretorLocador.class).getResultList();
     }
 }

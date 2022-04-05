@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/public/v1/corretor-resource/corretor/locador")
@@ -38,5 +39,11 @@ public class CorretorLocadorResource {
     public void deleteCorretorLocador(@RequestParam Integer id) {
         log.info("Deletando corretor locador");
         corretorLocadorService.deleteCorretorLocador(id);
+    }
+
+    @GetMapping("/corretor/locador/comissao")
+    public List<CorretorLocador> getCorretorComissao(){
+        log.info("Listando corretor locador");
+        return corretorLocadorService.getCorretorComissao();
     }
 }

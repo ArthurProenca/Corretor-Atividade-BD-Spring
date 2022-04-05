@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/public/v1/corretor-resource/locador")
@@ -37,5 +38,11 @@ public class LocadorResource {
     @PostMapping("/delete")
     public void deleteLocador(@RequestParam int cod_lcd) {
         locadorService.deleteLocador(cod_lcd);
+    }
+
+    @Transactional
+    @GetMapping("/not/alugado")
+    public List<Locador> getLocadorNotAlugado() {
+        return locadorService.getLocadorNaoAluga();
     }
 }

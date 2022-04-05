@@ -70,6 +70,11 @@ public class PessoaResource {
     public List<Pessoa> getPessoaNaoCorretora(){
         return pessoaService.pessoaNaoCorretora();
     }
+
+    @GetMapping("/pessoa/corretora/locadora")
+    public List<Pessoa> getPessoaCorretoraLocadora(){
+        return pessoaService.pessoaCorretoraOuLocadora();
+    }
 }
 
 

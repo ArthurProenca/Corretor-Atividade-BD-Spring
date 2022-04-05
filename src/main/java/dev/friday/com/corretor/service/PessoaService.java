@@ -89,5 +89,12 @@ public class PessoaService {
                 .getResultList();
     }
 
+    public List<Pessoa> pessoaCorretoraOuLocadora(){
+        return entityManager.createNativeQuery("SELECT * FROM pessoa WHERE cod_pessoa IN ((SELECT cod_crt FROM corretor) " +
+                "UNION (SELECT cod_lcd FROM locador));", Pessoa.class)
+                .getResultList();
+
+    }
+
 
 }
