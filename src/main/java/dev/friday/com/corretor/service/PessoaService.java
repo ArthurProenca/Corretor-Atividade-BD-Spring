@@ -85,7 +85,7 @@ public class PessoaService {
                 .getResultList();
     }
     public List<Pessoa> pessoaNaoCorretora() {
-        return entityManager.createNativeQuery("SELECT cod_pessoa, p_nome FROM pessoa WHERE cod_pessoa == ANY (SELECT cod_pessoa FROM corretor)")
+        return entityManager.createNativeQuery("SELECT cod_pessoa, p_nome FROM pessoa WHERE cod_pessoa = ANY (SELECT cod_pessoa FROM corretor)")
                 .getResultList();
     }
 

@@ -30,6 +30,12 @@ public class Pessoa implements Serializable {
     @Column(name = "u_nome", nullable = false, length = 40)
     private String uNome;
 
+    public Pessoa(String uNome, String pNome, String mInicial) {
+        this.pNome = pNome;
+        this.mInicial = mInicial;
+        this.uNome = uNome;
+    }
+
     @Override
     public String toString() {
         return "Pessoa{" +

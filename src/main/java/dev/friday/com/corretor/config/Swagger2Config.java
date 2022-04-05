@@ -42,8 +42,8 @@ public class Swagger2Config {
 
     private ApiInfo metadata() {
         return new ApiInfoBuilder()
-                .title("Sales Order JDE API")
-                .description("API for Sales Order JDE")
+                .title("Corretora API")
+                .description("API for Corretora")
                 .version("1.0.0")
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")

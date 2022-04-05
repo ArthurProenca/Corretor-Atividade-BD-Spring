@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/public/v1/corretor-resource/aluga")
@@ -20,7 +21,8 @@ public class AlugaResource {
 
     @PostMapping("/insert")
     @Transactional
-    public void insertAluga(@RequestBody Aluga aluga) {
+    public void insertAluga(@RequestParam Integer cod_imv, @RequestParam Integer cod_crt, @RequestParam Integer cod_lct, @RequestParam Date data_inicio, @RequestParam Date data_fim) {
+        Aluga aluga = new Aluga(cod_imv, cod_crt, cod_lct, data_inicio, data_fim);
         alugaService.insertAluga(aluga);
     }
 

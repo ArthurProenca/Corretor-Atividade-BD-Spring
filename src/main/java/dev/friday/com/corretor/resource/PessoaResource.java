@@ -24,7 +24,8 @@ public class PessoaResource {
     @PostMapping("/insert")
     @ApiOperation(value = "Insert Pessoa into DB")
     @Transactional
-    public void insertPessoa(@RequestBody Pessoa pessoa) {
+    public void insertPessoa(@RequestParam String u_nome, @RequestParam String p_nome, @RequestParam String m_inicial) {
+        Pessoa pessoa = new Pessoa(u_nome, p_nome, m_inicial);
         pessoaService.insertInto(pessoa);
     }
 
