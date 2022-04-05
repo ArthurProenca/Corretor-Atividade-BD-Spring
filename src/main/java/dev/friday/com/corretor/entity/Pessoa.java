@@ -1,6 +1,8 @@
 package dev.friday.com.corretor.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "pessoa")
+@AllArgsConstructor
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Pessoa implements Serializable {
     @Id
@@ -25,15 +29,6 @@ public class Pessoa implements Serializable {
 
     @Column(name = "u_nome", nullable = false, length = 40)
     private String uNome;
-
-    public Pessoa(Integer cod_pessoa, String pNome, String mInicial, String uNome) {
-        this.cod_pessoa = cod_pessoa;
-        this.pNome = pNome;
-        this.mInicial = mInicial;
-        this.uNome = uNome;
-    }
-
-    public Pessoa(){};
 
     @Override
     public String toString() {

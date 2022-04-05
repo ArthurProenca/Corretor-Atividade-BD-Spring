@@ -27,7 +27,7 @@ public class PessoaService {
     @Transactional
     public void insertInto(Pessoa pessoa) {
         entityManager.createNativeQuery("INSERT INTO pessoa (p_nome, u_nome, m_inicial) VALUES (?1, ?2, ?3)")
-                .setParameter(1, pessoa.getMInicial())
+                .setParameter(1, pessoa.getPNome())
                 .setParameter(2, pessoa.getUNome())
                 .setParameter(3, pessoa.getMInicial())
                 .executeUpdate()
@@ -61,27 +61,33 @@ public class PessoaService {
     }
 
     @Transactional
-    public String searchPessoa(String unome, String pnome, String minicial) {
-        Pessoa pessoa = new Pessoa();
-        String query = "";
-        if (unome != null) {
-            pessoa.setUNome(unome);
-            query = String.format("SELECT FROM pessoa WHERE u_nome like %s", pessoa.getUNome());
-        }
-        if (pnome != null) {
-            pessoa.setPNome(pnome);
-            query = String.format("SELECT FROM pessoa WHERE p_nome like %s", pessoa.getPNome());
-        }
-        if (minicial != null) {
-            pessoa.setMInicial(minicial);
-            query = String.format("SELECT FROM pessoa WHERE m_inicial like %s", pessoa.getMInicial());
-        }
-        return String.valueOf(entityManager.createNativeQuery(query).executeUpdate());
+    public List<Pessoa> searchPessoa(String unome, String pnome, String minicial) {
+
+        String query = "SELECT p FROM Pessoa p WHERE u_nome LIKE '%" + unome + "%' OR p_nome LIKE '%" + pnome + "%' OR m_inicial LIKE '%" + minicial + "%'";
+        return entityManager.createQuery(query, Pessoa.class).getResultList();
+
+    }
+
+    @Transactional
+    public List<Pessoa> searchPessoaAninhada(String telefone) {
+
+        String query = "SELECT p FROM Pessoa p WHERE p.cod_pessoa = (SELECT cod_pessoa FROM Telefone t WHERE t.telefone = '" + telefone + "')";
+        return entityManager.createQuery(query, Pessoa.class).getResultList();
 
     }
 
     public Iterable<Pessoa> getAll(){
-        return entityManager.createQuery("SELECT p FROM Pessoa p", Pessoa.class).getResultList();
+        return entityManager.createNativeQuery("SELECT ALL cod_pessoa FROM pessoa").getResultList();
     }
+
+    public List<Pessoa> pessoaCorretora() {
+        return entityManager.createNativeQuery("SELECT DISTINCT * FROM pessoa WHERE EXISTS (SELECT * FROM corretor WHERE corretor.cod_crt = pessoa.cod_pessoa);")
+                .getResultList();
+    }
+    public List<Pessoa> pessoaNaoCorretora() {
+        return entityManager.createNativeQuery("SELECT cod_pessoa, p_nome FROM pessoa WHERE cod_pessoa == ANY (SELECT cod_pessoa FROM corretor)")
+                .getResultList();
+    }
+
 
 }

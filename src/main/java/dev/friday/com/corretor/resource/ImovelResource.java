@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/public/v1/corretor-resource/imovel")
@@ -38,4 +39,25 @@ public class ImovelResource {
         log.info("Deleting imovel: ");
         imovelService.deleteImovel(id);
     }
+
+    @GetMapping("/having/mensalidade/{mensalidade}")
+    public List<Imovel> havingMensalidade(Float mensalidade) {
+
+        return imovelService.searchImovelHaving(mensalidade);
+    }
+
+
+    @GetMapping("/sum")
+    public Object countMensalidade() {
+        String res = "A soma de todos é: " + imovelService.countMensalidade().toString() + " reais";
+        res += "\nEnquanto o menor valor é: " + imovelService.minMensalidade().toString() + " reais";
+        return res;
+    }
+
+    @GetMapping("/imovel/not/aluga")
+    public List<Imovel> imovelNotAluga(){
+        return imovelService.imovelNotAluga();
+    }
+
+
 }

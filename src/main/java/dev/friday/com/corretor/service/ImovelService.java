@@ -1,6 +1,6 @@
 package dev.friday.com.corretor.service;
 
-import dev.friday.com.corretor.entity.Imovel;
+import dev.friday.com.corretor.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -62,4 +63,34 @@ public class ImovelService {
                 .executeUpdate();
     }
 
+    @Transactional
+    public Imovel getImovel(int cod_imv) {
+        return (Imovel) entityManager.createNativeQuery("SELECT * FROM imovel WHERE cod_imv = ?1", Imovel.class)
+                .setParameter(1, cod_imv)
+                .getSingleResult();
+    }
+
+    @Transactional
+    public List<Imovel> getImoveis() {
+        return entityManager.createNativeQuery("SELECT * FROM imovel", Imovel.class)
+                .getResultList();
+    }
+
+    public List<Imovel> searchImovelHaving(Float mensalidade) {
+        return entityManager.createNativeQuery("SELECT * FROM imovel WHERE cod_imv > 1 GROUP BY mensalidade HAVING mensalidade > ?1")
+                .setParameter(1, mensalidade)
+                .getResultList();
+    }
+
+    public Object countMensalidade(){
+        return entityManager.createNativeQuery("SELECT SUM(mensalidade) FROM imovel").getSingleResult();
+    }
+
+    public Object minMensalidade(){
+        return entityManager.createNativeQuery("SELECT MIN(mensalidade) FROM imovel").getSingleResult();
+    }
+
+    public List<Imovel> imovelNotAluga() {
+        return entityManager.createNativeQuery("SELECT DISTINCT * FROM imovel WHERE NOT EXISTS (SELECT * FROM aluga WHERE aluga.cod_imv = imovel.cod_imv);").getResultList();
+    }
 }

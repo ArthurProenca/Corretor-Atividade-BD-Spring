@@ -6,15 +6,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Table(name = "imovel")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class Imovel {
+@Entity
+public class Imovel implements Serializable {
     @Id
     @Column(name = "cod_imv", nullable = false)
     private Integer cod_imv;

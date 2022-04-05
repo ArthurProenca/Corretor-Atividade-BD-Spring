@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import dev.friday.com.corretor.entity.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/public/v1/corretor-resource/pessoa")
@@ -44,7 +45,7 @@ public class PessoaResource {
     @PostMapping("/search")
     @ApiOperation(value = "Search in table pessoa any parameter or String")
     @Transactional
-    public String searchPessoa(@RequestParam(required = false) String unome, @RequestParam(required = false) String pnome, @RequestParam(required = false) String minicial) {
+    public List<Pessoa> searchPessoa(@RequestParam(required = false) String unome, @RequestParam(required = false) String pnome, @RequestParam(required = false) String minicial) {
         return pessoaService.searchPessoa(unome, pnome, minicial);
     }
 
@@ -52,6 +53,22 @@ public class PessoaResource {
     @ApiOperation(value = "Get in table pessoa all tuples")
     public Iterable<Pessoa> getAllPessoa(){
         return pessoaService.getAll();
+    }
+
+    @PostMapping("/pessoa/telefone")
+    @Transactional
+    public List<Pessoa> getPessoaByTelefone(@RequestParam String telefone){
+        return pessoaService.searchPessoaAninhada(telefone);
+    }
+
+    @GetMapping("/pessoa/corretora")
+    public List<Pessoa> getPessoaCorretora(){
+        return pessoaService.pessoaCorretora();
+    }
+
+    @GetMapping("/pessoa/nao/corretora")
+    public List<Pessoa> getPessoaNaoCorretora(){
+        return pessoaService.pessoaNaoCorretora();
     }
 }
 
